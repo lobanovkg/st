@@ -1,0 +1,22 @@
+live_event:
+  -
+    id: 1
+    origin_id: 777
+    name: "test event name"
+    active: 1
+
+social_type:
+  -
+    id: 1
+    name: "in"
+
+social_account:
+  -
+    id: 1
+    social_type_id: 1
+    user_name: "test-instagram"
+
+live_event_accounts:
+  -
+    account_id: 1
+    live_event_id: 1

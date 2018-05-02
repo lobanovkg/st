@@ -1,0 +1,19 @@
+social_tracker_homepage:
+    path:     /update/
+    methods: POST
+    defaults: { _controller: SocialTrackerBundle:ManageAccount:update }
+
+social_tracker_feed_get:
+    path:     /feed/{originEventId}/
+    methods: GET
+    defaults: { _controller: SocialTrackerBundle:AccountFeed:feed }
+
+social_tracker_feed_post:
+    path:     /feed/{originEventId}/
+    methods: POST
+    defaults: { _controller: SocialTrackerBundle:AccountFeed:feed }
+
+social_tracker_index:
+    path:    /
+    methods: GET
+    defaults: { _controller: SocialTrackerBundle:Index:index }

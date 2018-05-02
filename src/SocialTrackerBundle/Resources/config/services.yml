@@ -1,0 +1,40 @@
+imports:
+    - { resource: aws_services.yml }
+    - { resource: social_services.yml }
+
+services:
+    social_tracker.post.record:
+        class: SocialTrackerBundle\Recording\Post\PostRecord
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@service_container"
+
+    social_tracker.event.record:
+        class: SocialTrackerBundle\Recording\Event\Record
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@service_container"
+
+    social_tracker.event.validator:
+        class: SocialTrackerBundle\Recording\Event\Validator\Validate
+
+    social_tracker.event_data.service:
+        class: SocialTrackerBundle\Recording\Event\EventDataService
+        arguments:
+          - "@doctrine.orm.entity_manager"
+
+    social_tracker.feed.service:
+        class: SocialTrackerBundle\Service\AccountFeed
+        arguments:
+          - "@service_container"
+
+    social_tracker.account_managing.service:
+        class: SocialTrackerBundle\Service\AccountManaging
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@service_container"
+
+    social_tracker.log_wrapper:
+        class: SocialTrackerBundle\Logger\LogWrapper
+        arguments:
+          - '%monolog_log_level%'

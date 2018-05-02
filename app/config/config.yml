@@ -1,0 +1,112 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+    # Log paths
+    social_crawler_command_log_path: '%kernel.project_dir%/var/logs/social-crawler-command.log'
+    twitter_grabber_log_path: '%kernel.project_dir%/var/logs/twitter-grabber.log'
+    instagram_grabber_log_path: '%kernel.project_dir%/var/logs/instagram-grabber.log'
+    instagram_post_grabber_log_path: '%kernel.project_dir%/var/logs/instagram-post-grabber.log'
+    add_account_to_sqs_log_path: '%kernel.project_dir%/var/logs/add-account-to-sqs.log'
+    add_post_to_sqs_log_path: '%kernel.project_dir%/var/logs/add-post-to-sqs.log'
+    validate_post_log_path: '%kernel.project_dir%/var/logs/validate-post-url.log'
+    validate_account_log_path: '%kernel.project_dir%/var/logs/validate-account.log'
+    truck_json_structure_instagram_api: '%kernel.project_dir%/var/logs/track-json-structure-instagram-api.log'
+    # Queue urls
+    account_validate_queue_url: '%aws_sqs_queue_url%social-tracker-validate-account'
+    account_grabber_queue_url: '%aws_sqs_queue_url%social-tracker-grabber'
+    validate_post_url_queue_url: '%aws_sqs_queue_url%social-tracker-validate-post'
+    rewrite_post_queue_url: '%aws_sqs_queue_url%social-tracker-rewrite-post'
+    post_comment_grabber: '%aws_sqs_queue_url%social-tracker-post-comment-grabber'
+
+framework:
+    #esi: ~
+    translator: { fallbacks: [en] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    templating:
+        engines: ['twig']
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8mb4
+        slaves:
+            slave1:
+                dbname:   '%slave_database_name%'
+                host:     '%slave_database_host%'
+                port:     '%slave_database_port%'
+                user:     '%slave_database_user%'
+                password: '%slave_database_password%'
+                charset: UTF8mb4
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    host: '%mailer_host%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    spool: { type: memory }
+
+social_tracker:
+    twitter_client_api:
+        clients:
+            client1:
+                consumer_key: '%twitter_consumer_key_1%'
+                consumer_secret: '%twitter_consumer_secret_1%'
+                oauth_token: '%twitter_oauth_token_1%'
+                oauth_token_secret: '%twitter_oauth_token_secret_1%'
+            client2:
+                consumer_key: '%twitter_consumer_key_2%'
+                consumer_secret: '%twitter_consumer_secret_2%'
+                oauth_token: '%twitter_oauth_token_2%'
+                oauth_token_secret: '%twitter_oauth_token_secret_2%'
+            client3:
+                consumer_key: '%twitter_consumer_key_3%'
+                consumer_secret: '%twitter_consumer_secret_3%'
+                oauth_token: '%twitter_oauth_token_3%'
+                oauth_token_secret: '%twitter_oauth_token_secret_3%'
+    aws:
+        sdk:
+            region: '%aws_sdk_region%'
+            version: '%aws_sdk_version%'
+        s3:
+            bucket_name: '%s3_bucket_name%'

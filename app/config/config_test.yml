@@ -1,0 +1,29 @@
+imports:
+    - { resource: config_dev.yml }
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true
+
+parameters:
+    database_host: localhost
+    database_port: 3306
+    database_name: uproxx_social_tracker_test
+    database_user: root
+    database_password: 7
+
+    slave_database_host: localhost
+    slave_database_port: 3306
+    slave_database_name: uproxx_social_tracker_test
+    slave_database_user: root
+    slave_database_password: 7

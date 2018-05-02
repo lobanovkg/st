@@ -1,0 +1,87 @@
+live_event:
+  -
+    id: 1
+    origin_id: 777
+    name: "test event name"
+    active: 1
+  -
+    id: 2
+    origin_id: 888
+    name: "test event"
+    active: 1
+  -
+    id: 3
+    origin_id: 666
+    name: "devil event"
+    active: 0
+
+social_type:
+  -
+    id: 1
+    name: "in"
+  -
+    id: 2
+    name: "tw"
+
+social_account:
+  -
+    id: 1
+    social_type_id: 1
+    user_name: "test-instagram"
+  -
+    id: 2
+    social_type_id: 2
+    user_name: "test-twitter"
+
+live_event_accounts:
+  -
+    account_id: 1
+    live_event_id: 1
+  -
+    account_id: 2
+    live_event_id: 1
+  -
+    account_id: 1
+    live_event_id: 2
+  -
+    account_id: 2
+    live_event_id: 2
+  -
+    account_id: 2
+    live_event_id: 3
+
+
+social_post:
+  -
+    id: 1
+    account_id: 1
+    origin_post_id: 1234
+    publish_date: "2018-02-23 08:50:06"
+    post_info: "test #test @testAccount"
+    url: "/test/post.url"
+    message: "test message"
+  -
+    id: 2
+    account_id: 2
+    origin_post_id: 1234
+    publish_date: "2018-01-21 07:50:06"
+    post_info: "test #mega @sport"
+    url: "/test/post1.url"
+    message: "mega test message"
+
+live_event_posts:
+  -
+    post_id: 1
+    live_event_id: 1
+  -
+    post_id: 2
+    live_event_id: 1
+  -
+    post_id: 1
+    live_event_id: 2
+  -
+    post_id: 2
+    live_event_id: 2
+  -
+    post_id: 2
+    live_event_id: 3

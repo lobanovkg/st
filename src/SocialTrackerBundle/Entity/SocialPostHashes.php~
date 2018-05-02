@@ -1,0 +1,103 @@
+<?php
+
+namespace SocialTrackerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SocialPostHashes
+ *
+ * @ORM\Table(name="social_post_hashes", indexes={@ORM\Index(name="social_post_hashes_social_post_id_fk", columns={"post_id"}), @ORM\Index(name="social_post_hashes_social_hash_id_fk", columns={"hash_id"})})
+ * @ORM\Entity(repositoryClass="SocialTrackerBundle\Repository\SocialPostHashes")
+ */
+class SocialPostHashes
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \SocialHash
+     *
+     * @ORM\ManyToOne(targetEntity="SocialHash")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="hash_id", referencedColumnName="id")
+     * })
+     */
+    private $hash;
+
+    /**
+     * @var \SocialPost
+     *
+     * @ORM\ManyToOne(targetEntity="SocialPost")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * })
+     */
+    private $post;
+
+
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set hash.
+     *
+     * @param \SocialTrackerBundle\Entity\SocialHash|null $hash
+     *
+     * @return SocialPostHashes
+     */
+    public function setHash(\SocialTrackerBundle\Entity\SocialHash $hash = null)
+    {
+        $this->hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Get hash.
+     *
+     * @return \SocialTrackerBundle\Entity\SocialHash|null
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * Set post.
+     *
+     * @param \SocialTrackerBundle\Entity\SocialPost|null $post
+     *
+     * @return SocialPostHashes
+     */
+    public function setPost(\SocialTrackerBundle\Entity\SocialPost $post = null)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post.
+     *
+     * @return \SocialTrackerBundle\Entity\SocialPost|null
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+}

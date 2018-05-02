@@ -1,0 +1,31 @@
+services:
+    social_tracker.twitter.api_connection:
+        class: SocialTrackerBundle\SocialNetworks\Twitter\Connection
+        arguments:
+          - '%social_tracker.twitter_client_api.clients%'
+
+    social_tracker.twitter.account_validator:
+        class: SocialTrackerBundle\Recording\Event\Validator\TwitterValidator
+        arguments:
+          - "@service_container"
+
+    social_tracker.twitter.account_crawler:
+        class: SocialTrackerBundle\Crawler\Twitter\Crawler
+        arguments:
+          - "@service_container"
+
+    social_tracker.instagram.account_validator:
+        class: SocialTrackerBundle\Recording\Event\Validator\InstagramValidator
+
+    social_tracker.instagram.account_crawler:
+        class: SocialTrackerBundle\Crawler\Instagram\Crawler
+        arguments:
+          - "@service_container"
+
+    social_tracker.instagram.post_crawler:
+        class: SocialTrackerBundle\Crawler\Instagram\PostCrawler
+        arguments:
+          - "@service_container"
+
+    social_tracker.instagram.validate_crawler:
+        class: SocialTrackerBundle\Crawler\Instagram\Validate\ValidateCrawlerResponseStructure

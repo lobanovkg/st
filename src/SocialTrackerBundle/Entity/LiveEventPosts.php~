@@ -1,0 +1,45 @@
+<?php
+
+namespace SocialTrackerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * LiveEventPosts
+ *
+ * @ORM\Table(name="live_event_posts", indexes={@ORM\Index(name="live_event_posts_live_event_id_fk", columns={"live_event_id"}), @ORM\Index(name="live_event_posts_social_post_id_fk", columns={"post_id"})})
+ * @ORM\Entity
+ */
+class LiveEventPosts
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned"=true})
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var LiveEvent
+     *
+     * @ORM\ManyToOne(targetEntity="LiveEvent")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="live_event_id", referencedColumnName="id")
+     * })
+     */
+    private $liveEvent;
+
+    /**
+     * @var SocialPost
+     *
+     * @ORM\ManyToOne(targetEntity="SocialPost")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * })
+     */
+    private $post;
+
+
+}

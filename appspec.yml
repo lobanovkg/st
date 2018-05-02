@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/social-tracker
+permissions:
+   - object: /var/www/social-tracker
+     owner: ubuntu
+     group: ubuntu
+
+hooks:
+  AfterInstall:
+    - location: deploy_hooks/build.sh
+      runas: ubuntu

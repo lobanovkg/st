@@ -1,0 +1,21 @@
+services:
+    social_tracker.aws.sqs.client:
+        class: SocialTrackerBundle\AWS\SQS\SQSClient
+        arguments:
+          - '%social_tracker.aws.sdk.credentials%'
+
+    social_tracker.aws.sqs.service:
+        class: SocialTrackerBundle\AWS\SQS\SQSService
+        arguments:
+          - "@=service('social_tracker.aws.sqs.client').getSQSClient()"
+
+    social_tracker.aws.s3.client:
+        class: SocialTrackerBundle\AWS\S3\S3Client
+        arguments:
+          - '%social_tracker.aws.sdk.credentials%'
+
+    social_tracker.aws.s3.service:
+        class: SocialTrackerBundle\AWS\S3\S3Service
+        arguments:
+          - "@=service('social_tracker.aws.s3.client').getS3Client()"
+          - '%social_tracker.aws.s3.bucket_name%'

@@ -1,0 +1,2 @@
+social_tracker:
+    resource: "@SocialTrackerBundle/Resources/config/routing.yml"
